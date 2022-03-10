@@ -1,7 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import BasicAuthentication
 from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin
 
+from .permissions import IsOwnerOrReadOnly
+
+from django.contrib.auth.models import User
 from .models import Login
 from .serializers import LoginSerializer
 
@@ -11,11 +16,12 @@ class LoginView(
     UpdateModelMixin,
     DestroyModelMixin,
 ):
+    permission_classes = [IsOwnerOrReadOnly]
 
     def get(self, request, id=None):
         if id:
             try:
-                queryset = Login.objects.get(id=id)
+                queryset = Login.objects.get(id=id, user = request.user)
             except Login.DoesNotExist:
                 # If the Login item does not exist, return an error response
                 return Response({'errors': 'This Login item does not exist.'}, status=400)
@@ -27,7 +33,7 @@ class LoginView(
 
         else:
             # Get all Login items from the database using Django's model ORM
-            queryset = Login.objects.all()
+            queryset = Login.objects.filter(owner=request.user)
 
             # Serialize list of Logins item from Django queryset object to JSON formatted data
             read_serializer = LoginSerializer(queryset, many=True)
@@ -38,14 +44,13 @@ class LoginView(
 
     def post(self, request):
         # Pass JSON data from user POST request to serializer for validation
-        create_serializer = LoginSerializer(data=request.data)
+        create_serializer = LoginSerializer(data=request.data, context={'request': request})
 
         # Check if user POST data passes validation checks from serializer
         if create_serializer.is_valid():
-
             # If user data is valid, create a new Login item record in the database
             login_item_object = create_serializer.save()
-
+            
             # Serialize the new Login item from a Python object to JSON format
             read_serializer = LoginSerializer(login_item_object)
 
@@ -96,3 +101,4 @@ class LoginView(
 
         # Return a HTTP response notifying that the Login item was successfully deleted
         return Response(status=204)
+

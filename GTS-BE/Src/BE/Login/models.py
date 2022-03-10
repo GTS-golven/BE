@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Login(models.Model):
     id = models.AutoField(
@@ -16,5 +17,8 @@ class Login(models.Model):
         null=False
         )
     
-class Meta:
-    db_table = 'users'
+    owner = models.ForeignKey(
+        'auth.User', 
+        related_name='snippets', 
+        on_delete=models.CASCADE
+        )
