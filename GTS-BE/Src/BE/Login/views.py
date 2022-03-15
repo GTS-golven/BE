@@ -1,10 +1,14 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin
+from rest_framework import generics
+
+
 
 from .permissions import IsOwnerOrReadOnly
+from .serializers import UsersSerializer
 
 from django.contrib.auth.models import User
 from .models import Login
@@ -102,3 +106,8 @@ class LoginView(
         # Return a HTTP response notifying that the Login item was successfully deleted
         return Response(status=204)
 
+class UserCreate(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UsersSerializer
+    permission_classes = (AllowAny, )
+    
