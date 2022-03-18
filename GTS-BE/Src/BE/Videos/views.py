@@ -1,22 +1,20 @@
 from django.shortcuts import render
-from .models import Video
-from .forms import VideoForm
+from .forms import UploadFileForm
+from django.views.decorators.csrf import ensure_csrf_cookie
 
-# Create your views here.
+from rest_framework.mixins import (
+    CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin
+)
+from rest_framework.viewsets import GenericViewSet
 
-def showvideo(request):
+from .models import Company
+from .serializers import CompanySerializer
 
-    lastvideo= Video.objects.last()
+class CompanyViewSet(GenericViewSet,  # generic view functionality
+                     CreateModelMixin,  # handles POSTs
+                     RetrieveModelMixin,  # handles GETs for 1 Company
+                     UpdateModelMixin,  # handles PUTs and PATCHes
+                     ListModelMixin):  # handles GETs for many Companies
 
-    videofile= lastvideo.videofile
-
-    form= VideoForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.save()
-
-    context= {'videofile': videofile,
-    'form': form
-    }
-    
-      
-    return render(request, 'Blog/videos.html', context)
+      serializer_class = CompanySerializer
+      queryset = Company.objects.all()
