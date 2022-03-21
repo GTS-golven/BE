@@ -33,7 +33,7 @@ urlpatterns = [
     path('api/auth/token/', TokenObtainPairView.as_view()),
     path('api/auth/token/refresh/', TokenRefreshView.as_view()),
     
-    path('', include('Videos.urls')),
-  
+    # path('', include('Videos.urls')),
+
     path('api/', include('Login.urls')),
 ]

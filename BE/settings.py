@@ -93,14 +93,11 @@ DATABASES = {
     # MySQL engine. Powered by the mysqlclient module.
     'ENGINE': 'django.db.backends.mysql',
     'NAME': 'gts-be',
-    'USER': 'gts_be',
-    'PASSWORD': '&LNgfD^~c#4EP7gm',
-    'HOST': 'morenoblyat.sjekmaster.nl',
-    'PORT': '6737',
-    'TEST': {
-            'NAME': 'gts-be-test',
-        },
-    },
+    'USER': 'root',
+    'PASSWORD': 'LNgfD^~c#4EP7gm',
+    'HOST': '127.0.0.1',
+    'PORT': '3306',
+    }
 }
 
 # Password validation
