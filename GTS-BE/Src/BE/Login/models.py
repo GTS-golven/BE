@@ -16,5 +16,8 @@ class Login(models.Model):
         null=False
         )
     
-class Meta:
-    db_table = 'users'
+    owner = models.ForeignKey(
+        'auth.User', 
+        related_name='snippets', 
+        on_delete=models.CASCADE
+        )
