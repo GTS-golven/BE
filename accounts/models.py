@@ -21,7 +21,7 @@ class CustomUser(AbstractUser):
             return os.path.join(path, filename)
         return wrapper
 
-    videofile= models.FileField(
+    profile_pic = models.FileField(
         upload_to=path_and_rename('accounts/'), 
         null=True, 
         verbose_name="")
