@@ -13,9 +13,17 @@ User = get_user_model()
 class UserCreate(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = serializers.UsersSerializer
-    permission_classes = (AllowAny, )
-
-class UserGet(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (AllowAny, )    
+    
+class UserGet(APIView):
+    permission_classes = (IsAuthenticated, )
+    
+    def get(self, request):
+        queryset = User.objects.get(id=request.user.id)
+        serializer = serializers.UsersSerializer(queryset)
+        return Response(serializer.data)
+    
+class UserEdit(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = serializers.UsersSerializer
-    permission_classes = (AllowAny, )
+    permission_classes = (IsAuthenticated, )
