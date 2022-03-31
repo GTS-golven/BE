@@ -20,7 +20,7 @@ class Videos(models.Model):
     video = models.FileField(upload_to=None, max_length=254)
     description = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
-    User = models.ForeignKey(User, on_delete=models.CASCADE, primary_key=True)
+    Id = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, blank=True, default='')
     GolfClub = models.CharField(max_length=30, blank=True, default='')
     GolfCourse = models.CharField(max_length=30, blank=True, default='')
