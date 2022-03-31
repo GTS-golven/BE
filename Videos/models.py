@@ -1,23 +1,30 @@
 from django.db import models
+from typing_extensions import Required
+from pygments.lexers import get_all_lexers
+from pygments.styles import get_all_styles
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 # Create your models here.
 
-class Video(models.Model):
-    name= models.CharField(max_length=100)
-    videofile= models.FileField(upload_to='videos/', null=True, verbose_name="")
+LEXERS = [item for item in get_all_lexers() if item[1]]
+LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
+STYLE_CHOICES = sorted([(item, item) for item in get_all_styles()])
 
-def __str__(self):
-    return self.name + ": " + str(self.videofile)
+class Videos(models.Model):
+    code = models.TextField()
+    linenos = models.BooleanField(default=False)
+    language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
+    style = models.CharField(choices=STYLE_CHOICES, default='friendly', max_length=100)
+    # Models for uploading videos
+    video = models.FileField(upload_to=None, max_length=254)
+    description = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    User = models.ForeignKey(User, on_delete=models.CASCADE, primary_key=True)
+    title = models.CharField(max_length=100, blank=True, default='')
+    GolfClub = models.CharField(max_length=30, blank=True, default='')
+    GolfCourse = models.CharField(max_length=30, blank=True, default='')
+    User = models.AutoField(primary_key=True, foreign_key=True)
 
-class Company(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
-    website = models.URLField(blank=True)
-    street_line_1 = models.CharField(max_length=255)
-    street_line_2 = models.CharField(max_length=255, blank=True)
-    city = models.CharField(max_length=80)
-    state = models.CharField(max_length=80)
-    zipcode = models.CharField(max_length=10)
-
-    def __str__(self):
-        return self.name
+    class Meta:
+        ordering = ['date']
