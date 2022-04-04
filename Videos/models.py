@@ -1,4 +1,6 @@
 from django.db import models
+from django.db import models
+from django.conf import settings
 from typing_extensions import Required
 from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
@@ -24,7 +26,7 @@ class Videos(models.Model):
     title = models.CharField(max_length=100, blank=True, default='')
     GolfClub = models.CharField(max_length=30, blank=True, default='')
     GolfCourse = models.CharField(max_length=30, blank=True, default='')
-    User = models.AutoField(primary_key=True, foreign_key=True)
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['date']
