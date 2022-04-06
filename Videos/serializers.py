@@ -4,14 +4,14 @@ from Videos.models import Videos, LANGUAGE_CHOICES, STYLE_CHOICES
 
 class VideosSerializer(serializers.Serializer):
     code = serializers.CharField(style={'base_template': 'textarea.html'})
-    linenos = serializers.BooleanField(required=False)
+    linenos = serializers.BooleanField()
     language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default='python')
     style = serializers.ChoiceField(choices=STYLE_CHOICES, default='friendly')
-    description = serializers.CharField(required=False, allow_blank=True, max_length=100)
-    title = serializers.CharField(required=False, allow_blank=False, max_length=50)
+    description = serializers.CharField(allow_blank=True, max_length=100)
+    title = serializers.CharField(allow_blank=False, max_length=50)
     id = serializers.IntegerField(read_only=True)
-    GolfClub = serializers.CharField(Required=False, allow_blank=False)
-    GolfCourse = serializers.CharField(Required=True, allow_blank=True, max_length=50)
+    GolfClub = serializers.CharField(allow_blank=False)
+    GolfCourse = serializers.CharField(allow_blank=True, max_length=50)
     date = serializers.DateTimeField(read_only=True)
     video = serializers.FileField(allow_empty_file=False)
 
