@@ -25,3 +25,29 @@ def video_list(request):
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
+
+@csrf_exempt
+def video_detail(request, pk):
+    """
+    Retrieve, update or delete a code snippet.
+    """
+    try:
+        video = video.objects.get(pk=pk)
+    except video.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = APISerializer(video)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = APISerializer(video, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        video.delete()
+        return HttpResponse(status=204)
