@@ -14,7 +14,7 @@ def video_list(request):
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        snippets = video.objects.all()
+        video = video.objects.all()
         serializer = APISerializer(video, many=True)
         return JsonResponse(serializer.data, safe=False)
 

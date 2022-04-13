@@ -49,7 +49,7 @@ class APISerializer(serializers.ModelSerializer):
         instance.description = validated_data.get('description', instance.description)
         instance.date = validated_data.get('date', instance.date)
         instance.video = validated_data.get('video', instance.video)
-        user = User(**validated_data, self)
+        # user = User(**validated_data, self)
         instance.save()
         return instance
 

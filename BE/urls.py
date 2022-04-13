@@ -25,7 +25,9 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-
+urlpatterns = [
+    path('', include('API.urls')),
+]
 
 urlpatterns = [
     path('api/admin/', admin.site.urls),
@@ -38,6 +40,7 @@ urlpatterns = [
     # path('', include('Videos.urls')),
 
     path('api/', include('accounts.urls')),
+    path('api/', include('API.urls')),
 ]
 
 urlpatterns += *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
