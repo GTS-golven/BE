@@ -8,3 +8,8 @@ from . import serializers
 class VideoCreate(generics.CreateAPIView):
     queryset = models.Video.objects.all()
     serializer_class = serializers.VideoSerializer
+
+class VideoGet(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Video.objects.all()
+    serializer_class = serializers.VideoSerializer
+    # permission_classes = (AllowAny, )
