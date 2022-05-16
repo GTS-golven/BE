@@ -4,6 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from API.models import video
 from API.serializers import APISerializer
+from rest_framework.mixins import (CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin)
+from rest_framework.viewsets import GenericViewSet
 
 # Create your views here.
 
@@ -51,3 +53,12 @@ def video_detail(request, pk):
     elif request.method == 'DELETE':
         video.delete()
         return HttpResponse(status=204)
+
+class APIViewSet(GenericViewSet,  # generic view functionality
+                     CreateModelMixin,  # handles POSTs
+                     RetrieveModelMixin,  # handles GETs for 1 video
+                     UpdateModelMixin,  # handles PUTs and PATCHes
+                     ListModelMixin):  # handles GETs for many videos
+
+      serializer_class = APISerializer
+      queryset = video.objects.all()

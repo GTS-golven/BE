@@ -19,15 +19,18 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from rest_framework import routers
+
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
 
-urlpatterns = [
-    path('', include('API.urls')),
-]
+# urlpatterns = [
+#     path('api/videos/', include('API.urls')),
+#     path('api/videoapi/', include('VideoApi.urls'))
+# ] 
 
 urlpatterns = [
     path('api/admin/', admin.site.urls),
@@ -38,9 +41,20 @@ urlpatterns = [
     path('api/auth/token/refresh/', TokenRefreshView.as_view()),
     
     # path('', include('Videos.urls')),
-
+    path('api/videoapi/', include('VideoApi.urls')),
     path('api/', include('accounts.urls')),
     path('api/', include('API.urls')),
 ]
 
 urlpatterns += *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
+
+# router = routers.DefaultRouter()
+# # router.register(r'users', views.UserViewSet)
+# router.register(r'groups', views.GroupViewSet)
+
+# # Wire up our API using automatic URL routing.
+# # Additionally, we include login URLs for the browsable API.
+# urlpatterns = [
+#     path('', include(router.urls)),
+#     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+# ]
