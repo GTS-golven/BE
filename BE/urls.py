@@ -27,10 +27,6 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-# urlpatterns = [
-#     path('api/videos/', include('API.urls')),
-#     path('api/videoapi/', include('VideoApi.urls'))
-# ] 
 
 urlpatterns = [
     path('api/admin/', admin.site.urls),
@@ -40,7 +36,6 @@ urlpatterns = [
     path('api/auth/token/', TokenObtainPairView.as_view()),
     path('api/auth/token/refresh/', TokenRefreshView.as_view()),
     
-    # path('', include('Videos.urls')),
     path('api/videoapi/', include('VideoApi.urls')),
     path('api/', include('accounts.urls')),
     path('api/', include('API.urls')),
