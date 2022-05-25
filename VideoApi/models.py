@@ -4,7 +4,7 @@ from django.core.files.base import ContentFile
 
 # Create your models here.
 class Video(models.Model):
-    video = models.FileField(upload_to='videos/videos/')
+    video = models.CharField()
 
     class Meta:
         verbose_name = 'Video'
