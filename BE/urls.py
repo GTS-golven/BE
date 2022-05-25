@@ -18,7 +18,8 @@ from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
-
+from VideoApi.views import VideosView
+from rest_framework.routers import DefaultRouter
 from rest_framework import routers
 
 
@@ -27,6 +28,8 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+router = DefaultRouter()
+router.register(r'videos', VideosView,basename="videos")
 
 urlpatterns = [
     path('api/admin/', admin.site.urls),
@@ -36,9 +39,9 @@ urlpatterns = [
     path('api/auth/token/', TokenObtainPairView.as_view()),
     path('api/auth/token/refresh/', TokenRefreshView.as_view()),
     
-    path('api/videoapi/', include('VideoApi.urls')),
     path('api/', include('accounts.urls')),
     path('api/', include('API.urls')),
+    path('api/', include(router.urls)),
 ]
 
 urlpatterns += *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),

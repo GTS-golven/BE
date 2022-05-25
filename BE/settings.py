@@ -30,8 +30,8 @@ ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
 
 
-CORS_ALLOW_HEADERS = ('content-disposition', 'accept-encoding', 'access-control-allow-origin',
-                    'content-type', 'accept', 'origin', 'authorization')
+# CORS_ALLOW_HEADERS = ('content-disposition', 'accept-encoding', 'access-control-allow-origin',
+#                     'content-type', 'accept', 'origin', 'authorization')
 
 
 # Application definition
@@ -93,9 +93,9 @@ DATABASES = {
     'default': {
     # MySQL engine. Powered by the mysqlclient module.
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'gts-be',
+    'NAME': 'gts',
     'USER': 'root',
-    'PASSWORD': 'LNgfD^~c#4EP7gm',
+    'PASSWORD': 'root',
     'HOST': '127.0.0.1',
     'PORT': '3306',
     }
@@ -150,21 +150,15 @@ MEDIA_FILES_DIRS = os.path.join(BASE_DIR, 'media')
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
-}
-
-AUTH_USER_MODEL = 'accounts.CustomUser'
-
-
-REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
