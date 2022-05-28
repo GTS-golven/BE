@@ -4,6 +4,6 @@ from django.core.files.base import ContentFile
 
 # Create your models here.
 class Videos(models.Model):
-    video = models.FileField(upload_to='videos')
+    video = models.FileField()
 
 
