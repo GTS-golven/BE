@@ -1,6 +1,8 @@
 from rest_framework.test import APITestCase
 from django.urls import reverse
 from faker import Faker
+from rest_framework.test import APIRequestFactory
+from .. import views
 
 import os, glob
 
@@ -12,6 +14,8 @@ User = get_user_model()
 
 class TestSetUp(APITestCase):
     def setUp(self):
+        self.factory = APIRequestFactory()
+        
         self.user_create = reverse('user-create')
         self.get_token_url = '/api/auth/token'
         
@@ -22,13 +26,15 @@ class TestSetUp(APITestCase):
             'password': self.fake.password(),
             }
         
+        self.view = views.UserEdit.as_view()
+        
         self.user = User.objects.create(
             username = self.fake.user_name(),
             password = self.fake.password(),
         )
 
         self.user_updated_username = {
-            'password': self.fake.user_name(),
+            'username': self.fake.user_name(),
         }
                 
         self.user_updated_password = {
