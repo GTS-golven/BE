@@ -53,6 +53,8 @@ class Base64ImageField(serializers.FileField):
         extension = "jpg" if extension == "jpeg" else extension
 
         return extension
+
+# Video
 class VideoSerializer(serializers.ModelSerializer):
     video = Base64ImageField()
 
