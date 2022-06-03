@@ -42,7 +42,8 @@ urlpatterns = [
     path('api/auth/token/refresh/', TokenRefreshView.as_view()),
     
     path('api/', include('accounts.urls')),
-    path('api/', include('API.urls')),
+    path('api/videoapi/videos', include('VideoApi.urls')),
+    # path('api/', include('API.urls')),
     path('api/', include(router.urls)),
 ] 
 
