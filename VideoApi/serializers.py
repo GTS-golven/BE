@@ -1,3 +1,4 @@
+from turtle import title
 from rest_framework import serializers
 from .models import Videos
 import os
@@ -56,9 +57,12 @@ class Base64ImageField(serializers.FileField):
 
 # Video
 class VideoSerializer(serializers.ModelSerializer):
-    video = Base64ImageField()
+    video = Base64ImageField(), 
+    # title = serializers.CharField(required=False, allow_blank=True, max_length=50)
 
     class Meta:
         model = Videos
-        fields = ('id', 'video')
+        fields = ('id', 'video', 'title', 'description', 'golfclub', 'golfbaan', 'datum', 'rpm', 'height')
+
+
     
