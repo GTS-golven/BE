@@ -53,10 +53,12 @@ class Base64ImageField(serializers.FileField):
         extension = "jpg" if extension == "jpeg" else extension
 
         return extension
+        
 class VideoSerializer(serializers.ModelSerializer):
     video = Base64ImageField()
 
     class Meta:
         model = Videos
-        fields = ('id', 'video', 'title', 'description', 'golfclub', 'golfbaan', 'datum', 'rpm', 'height', 'travel', 'angle', 
+        fields = ('id', 'video', 'title', 'description', 'golfclub', 'golfbaan', 
+        'datum', 'rpm', 'height', 'travel', 'angle', 
         'xas', 'airtime', 'simulatie')

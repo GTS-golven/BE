@@ -9,7 +9,7 @@ class Videos(models.Model):
     description = models.TextField(blank=True)
     golfclub = models.CharField(max_length=10, blank=True)
     golfbaan = models.CharField(max_length=50, blank=True)
-    datum = models.DateTimeField()
+    datum = models.DateTimeField(blank=True)
     rpm = models.IntegerField(blank=True)
     height = models.IntegerField(blank=True)
     travel = models.IntegerField(blank=True)
