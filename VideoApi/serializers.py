@@ -58,5 +58,5 @@ class VideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Videos
-        fields = ('id', 'video')
-    
+        fields = ('id', 'video', 'title', 'description', 'golfclub', 'golfbaan', 'datum', 'rpm', 'height', 'travel', 'angle', 
+        'xas', 'airtime', 'simulatie')
