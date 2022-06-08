@@ -10,7 +10,11 @@ class Videos(models.Model):
     golfclub = models.CharField(max_length=10, blank=True)
     golfbaan = models.CharField(max_length=50, blank=True)
     datum = models.DateTimeField()
-    rpm = models.IntegerField()
-    height = models.IntegerField()
-
+    rpm = models.IntegerField(blank=True)
+    height = models.IntegerField(blank=True)
+    travel = models.IntegerField(blank=True)
+    angle = models.IntegerField(blank=True)
+    xas = models.IntegerField(blank=True)
+    airtime = models.IntegerField(blank=True)
+    simulatie = models.ImageField(blank=True)
 
