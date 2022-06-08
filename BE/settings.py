@@ -93,9 +93,9 @@ DATABASES = {
     'default': {
     # MySQL engine. Powered by the mysqlclient module.
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'gts',
+    'NAME': 'gts-be',
     'USER': 'root',
-    'PASSWORD': 'root',
+    'PASSWORD': 'LNgfD^~c#4EP7gm',
     'HOST': '127.0.0.1',
     'PORT': '3306',
     }
