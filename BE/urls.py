@@ -41,8 +41,8 @@ urlpatterns = [
     path('api/auth/token/', TokenObtainPairView.as_view()),
     path('api/auth/token/refresh/', TokenRefreshView.as_view()),
     
-    path('api/', include('accounts.urls')),
-    path('api/', include('API.urls')),
+    # path('api/', include('accounts.urls')),
+    path('api/', include('ai_datasets.urls')),
     path('api/', include(router.urls)),
 ] 
 

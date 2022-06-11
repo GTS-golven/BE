@@ -48,8 +48,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'accounts',
-    'API',
-    'VideoApi', 
+    'VideoApi',
+    'ai_datasets',
 ]
 
 MIDDLEWARE = [
@@ -89,15 +89,22 @@ WSGI_APPLICATION = 'BE.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#     # MySQL engine. Powered by the mysqlclient module.
+#     'ENGINE': 'django.db.backends.mysql',
+#     'NAME': 'gts',
+#     'USER': 'root',
+#     'PASSWORD': 'root',
+#     'HOST': '127.0.0.1',
+#     'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
-    # MySQL engine. Powered by the mysqlclient module.
-    'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'gts',
-    'USER': 'root',
-    'PASSWORD': 'root',
-    'HOST': '127.0.0.1',
-    'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
