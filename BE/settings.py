@@ -144,9 +144,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-MEDIA_FILES_DIRS = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'VideoApi')
+MEDIA_URL = '/VideoApi/'
+MEDIA_FILES_DIRS = os.path.join(BASE_DIR, 'VideoApi')
 
 
 REST_FRAMEWORK = {
