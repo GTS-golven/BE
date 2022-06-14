@@ -95,7 +95,7 @@ DATABASES = {
     'ENGINE': 'django.db.backends.mysql',
     'NAME': 'gts-be',
     'USER': 'root',
-    'PASSWORD': 'LNgfD^~c#4EP7gm',
+    'PASSWORD': 'root',
     'HOST': '127.0.0.1',
     'PORT': '3306',
     }
